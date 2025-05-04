@@ -1,0 +1,58 @@
+-- creating a datbase
+create database library;
+
+-- using database
+use library;
+
+-- creating tables
+-- book table
+create table book
+( book_id int primary key,
+book_name varchar(50),
+ISBN varchar(20),
+author_id int,
+published_year date,
+genre varchar(10),
+copies_available int,
+foreign key (author_id) references author(author_id));
+
+
+-- author table	
+create table author 
+(author_id int primary key,
+first_name varchar(10),
+last_name varchar(10),
+nationality varchar(30),
+sex char(1));
+
+-- reader table
+create table reader
+(reader_id int primary key,
+first_name varchar(10),
+last_name varchar(10),
+age int,
+sex char(1),
+joining_date date);
+
+-- transaction table
+create table book_transaction
+(transaction_id int primary key,
+book_id int,
+reader_id int,
+borrowed_date date,
+return_date date,
+foreign key (book_id) references book(book_id),
+foreign key (reader_id) references reader(reader_id));
+
+
+
+-- fine table
+create table fine
+(fine_id int primary key,
+fine_amt float,
+reason varchar(100),
+transaction_id int,
+foreign key (transaction_id) references book_transaction(transaction_id));
+
+
+
